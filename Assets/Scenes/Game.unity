@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 39237358}
   - component: {fileID: 39237357}
   - component: {fileID: 39237356}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,6 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 243867591}
   - component: {fileID: 243867592}
+  - component: {fileID: 243867593}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -402,22 +403,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &243867592
-Rigidbody:
+--- !u!114 &243867592
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243867590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43229e25409cb024d8bd15b0f631be4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 2
+  speed: 2
+  gravity: -10
+  characterController: {fileID: 243867593}
+--- !u!143 &243867593
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243867590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 6
-  m_CollisionDetection: 0
+  m_Height: 2
+  m_Radius: 1.01
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &256953116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 311327177090344999, guid: 1aa5fa9f8599b344bb3c97170c413c34, type: 3}
@@ -718,7 +737,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &411687420
 Transform:
@@ -1913,6 +1932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e9401a6c0e06b4dacd552a8368c67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 243867592}
+  finishTrans: {fileID: 411687420}
 --- !u!1001 &1889886958
 PrefabInstance:
   m_ObjectHideFlags: 0

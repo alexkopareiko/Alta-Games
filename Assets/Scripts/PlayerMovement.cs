@@ -8,10 +8,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float gravity = -50f;
     [SerializeField] CharacterController characterController;
-    bool move = false;
-    Vector3 startPosition;
     Vector3 toPosition;
     Vector3 velocity;
+    bool move = false;
     bool isGrounded;
     bool isArrived = false;
 
@@ -27,7 +26,10 @@ public class PlayerMovement : MonoBehaviour
         {
             CheckGround();
 
-            if (isArrived && isGrounded) move = false; 
+            if (isArrived && isGrounded)
+            {
+                move = false;
+            }
 
             // move forward
             if(!isArrived)
@@ -57,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
                 isArrived = true;
             }
 
-            //Debug.Log("move " + move);
         }
     }
 
@@ -69,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveTo(Vector3 _to)
     {
-        startPosition = transform.position;
         toPosition = _to;
         move = true;
         isArrived = false;

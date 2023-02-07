@@ -8,6 +8,7 @@ public class AreaTap : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] RectTransform tapArea;
     [SerializeField] CircleTap circleTap;
+    [SerializeField] Shoot shoot;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -15,6 +16,7 @@ public class AreaTap : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     }
     public void OnPointerUp(PointerEventData eventData)
     {
+        shoot.Initialize(circleTap.range);
         circleTap.gameObject.SetActive(false);
     }
 

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 toPosition;
     Vector3 velocity;
     bool isGrounded;
+    bool isArrived = false;
 
 
     private void Update()
@@ -26,8 +27,13 @@ public class PlayerMovement : MonoBehaviour
         {
             CheckGround();
 
+            if (isArrived && isGrounded) move = false; 
+
             // move forward
-            characterController.Move(transform.forward * speed * Time.deltaTime);
+            if(!isArrived)
+            {
+                characterController.Move(transform.forward * speed * Time.deltaTime);
+            }
 
             // gravity
             if (isGrounded && velocity.y < 0)
@@ -38,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             // jump
             if (isGrounded)
             {
-                velocity.y += Mathf.Sqrt(jumpHeight * gravity);
+                velocity.y += Mathf.Sqrt(-jumpHeight * gravity);
             }
 
             velocity.y += gravity * Time.deltaTime;
@@ -46,18 +52,19 @@ public class PlayerMovement : MonoBehaviour
             characterController.Move(velocity * Time.deltaTime);
 
             // check
-            if (transform.position == toPosition)
+            if (transform.position.z >= toPosition.z)
             {
-                move = false;
+                isArrived = true;
             }
 
-            Debug.Log("move " + move);
+            //Debug.Log("move " + move);
         }
     }
 
     void CheckGround()
     {
         isGrounded = characterController.isGrounded;
+        //Debug.Log("isGrounded " + isGrounded);
     }
 
     public void MoveTo(Vector3 _to)
@@ -65,5 +72,6 @@ public class PlayerMovement : MonoBehaviour
         startPosition = transform.position;
         toPosition = _to;
         move = true;
+        isArrived = false;
     }
 }

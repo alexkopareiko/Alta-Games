@@ -8,11 +8,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float gravity = -50f;
     [SerializeField] CharacterController characterController;
+    [SerializeField] PathLine pathLine;
+
     Vector3 toPosition;
     Vector3 velocity;
     bool move = false;
     bool isGrounded;
     bool isArrived = false;
+    WaitForSeconds waitMove = new WaitForSeconds(1);
 
 
     private void Update()
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             if (isArrived && isGrounded)
             {
                 move = false;
+
             }
 
             // move forward
@@ -57,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
             if (transform.position.z >= toPosition.z)
             {
                 isArrived = true;
+                pathLine.Initialize();
             }
 
         }

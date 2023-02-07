@@ -13,6 +13,7 @@ public class CircleTap : MonoBehaviour
     [SerializeField] float maxWidth = 300f;
     bool increment = true;
     Vector2 maxSize;
+    const float minScale = 0.1f;
 
     private void Update()
     {
@@ -24,7 +25,7 @@ public class CircleTap : MonoBehaviour
         else
         {
             range -= Time.deltaTime;
-            if (range <= 0.2f) increment = true;
+            if (range <= minScale) increment = true;
         }
 
         rectTransform.sizeDelta = maxSize * range;
@@ -39,7 +40,7 @@ public class CircleTap : MonoBehaviour
         rectTransform.position = _pos;
         increment = true;
 
-        rectTransform.sizeDelta = new Vector2(maxWidth * 0.2f, maxWidth * 0.2f);
+        rectTransform.sizeDelta = new Vector2(maxWidth * minScale, maxWidth * minScale);
         maxSize = new Vector2(maxWidth, maxWidth);
 
         range = 0.2f;

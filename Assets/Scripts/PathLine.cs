@@ -20,12 +20,26 @@ public class PathLine : MonoBehaviour
     {
         gameObject.AddComponent<MeshFilter>();
         meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        gameObject.SetActive(true);
+
+
+        float startWidth = playerTran.localScale.x;
+        // width correction
+        startWidth *= 1.2f;
+
+        
 
         meshRenderer.material = mat;
 
         mesh = GetComponent<MeshFilter>().mesh;
-        
         mesh.Clear();
+
+
 
         playerPos = playerTran.position;
         finishPos = finishTran.position;
@@ -38,7 +52,7 @@ public class PathLine : MonoBehaviour
             new Vector3(finishPos.x + endWidth/2, finishPos.y, finishPos.z + 0.1f),
         };
 
-        mesh.triangles = new int[] { 
+        mesh.triangles = new int[] {
             0, 3, 1, 2, 0, 3
         };
 
@@ -59,7 +73,6 @@ public class PathLine : MonoBehaviour
         };
 
         mesh.uv = uv;
-
 
     }
 }

@@ -245,6 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 243867591}
+  - component: {fileID: 243867594}
   - component: {fileID: 243867592}
   - component: {fileID: 243867593}
   m_Layer: 7
@@ -286,6 +287,7 @@ MonoBehaviour:
   speed: 2
   gravity: -30
   characterController: {fileID: 243867593}
+  pathLine: {fileID: 1522811701}
 --- !u!143 &243867593
 CharacterController:
   m_ObjectHideFlags: 0
@@ -304,6 +306,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &243867594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243867590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae29c7ffe1505c4892ff8aac61512c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minScale: 0.1
+  shoot: {fileID: 1382405667}
 --- !u!1001 &269987069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -754,6 +770,7 @@ MonoBehaviour:
   tapArea: {fileID: 654883451}
   circleTap: {fileID: 1245791283}
   shoot: {fileID: 1382405667}
+  player: {fileID: 243867594}
 --- !u!4 &688720729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 311327177090344999, guid: 1aa5fa9f8599b344bb3c97170c413c34, type: 3}
@@ -2192,7 +2209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1302420466
 Transform:
   m_ObjectHideFlags: 0
@@ -2281,9 +2298,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 1382405668}
-  minScale: 0.1
   force: 30
-  playerTrans: {fileID: 243867591}
+  pathLine: {fileID: 1522811701}
+  damageRadiusMulti: 5
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  playerMovement: {fileID: 243867592}
 --- !u!54 &1382405668
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2298,7 +2319,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 2
+  m_Constraints: 6
   m_CollisionDetection: 0
 --- !u!135 &1382405669
 SphereCollider:
@@ -2311,7 +2332,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1469191744
 PrefabInstance:
@@ -2417,7 +2438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTran: {fileID: 243867591}
   finishTran: {fileID: 411687420}
-  startWidth: 1.7
+  startWidth: 1
   endWidth: 1.7
   mat: {fileID: 2100000, guid: 10f5846bf27ebb645bd637beb5ee56fc, type: 2}
 --- !u!4 &1522811702

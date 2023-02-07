@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
 
 public class AreaTap : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] RectTransform tapArea;
     [SerializeField] CircleTap circleTap;
     [SerializeField] Shoot shoot;
+    [SerializeField] Player player;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -16,7 +16,7 @@ public class AreaTap : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        shoot.Initialize(circleTap.range);
+        player.SetScale(circleTap.range);
         circleTap.gameObject.SetActive(false);
     }
 

@@ -5,19 +5,36 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] Rigidbody m_rigidbody;
-    [SerializeField] float minScale = 0.1f;
     [SerializeField] float force = 0.1f;
-    [SerializeField] Transform playerTrans;
+    [SerializeField] PathLine pathLine;
+    [SerializeField] float damageRadiusMulti = 5f;
+    [SerializeField] LayerMask obstacleMask;
+    [SerializeField] PlayerMovement playerMovement;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("obstacle"))
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(
+                transform.position, 
+                transform.localScale.x * damageRadiusMulti, 
+                obstacleMask);
+            foreach (var hitCollider in hitColliders)
+            {
+                hitCollider.SendMessage("ApplyDamage");
+            }
+            playerMovement.MoveTo(transform.position);
+            gameObject.SetActive(false);
+
+        }
+    }
 
     public void Initialize(float _range)
     {
-        transform.localScale = playerTrans.localScale * _range;
-        if(transform.localScale.x <= minScale)
-        {
-            Debug.Log("MIN SCALE");
-            return;
-        }
-        m_rigidbody.AddForce(Vector3.forward * force, ForceMode.Impulse);
+        transform.localScale = playerMovement.transform.localScale * _range;
+        
         gameObject.SetActive(true);
+        m_rigidbody.AddForce(Vector3.forward * force, ForceMode.Impulse);
+        pathLine.gameObject.SetActive(false);
     }
 }

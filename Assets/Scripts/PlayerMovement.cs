@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravity = -50f;
     [SerializeField] CharacterController characterController;
     [SerializeField] PathLine pathLine;
+    [SerializeField] LayerMask groundLayer;
 
     Vector3 toPosition;
     Vector3 velocity;
@@ -69,7 +70,8 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckGround()
     {
-        isGrounded = characterController.isGrounded;
+        //isGrounded = characterController.isGrounded;
+        isGrounded = Physics.CheckSphere(transform.position, 0.05f, groundLayer, QueryTriggerInteraction.Ignore);
         //Debug.Log("isGrounded " + isGrounded);
     }
 

@@ -10,6 +10,12 @@ public class Shoot : MonoBehaviour
     [SerializeField] float damageRadiusMulti = 5f;
     [SerializeField] LayerMask obstacleMask;
     [SerializeField] PlayerMovement playerMovement;
+    WaitForSeconds hideDelay = new WaitForSeconds(0.5f);
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,9 +29,7 @@ public class Shoot : MonoBehaviour
             {
                 hitCollider.SendMessage("ApplyDamage");
             }
-            playerMovement.MoveTo(transform.position);
-            gameObject.SetActive(false);
-
+            StartCoroutine(HideMe());
         }
     }
 
@@ -36,5 +40,12 @@ public class Shoot : MonoBehaviour
         gameObject.SetActive(true);
         m_rigidbody.AddForce(Vector3.forward * force, ForceMode.Impulse);
         pathLine.gameObject.SetActive(false);
+    }
+
+    IEnumerator HideMe()
+    {
+        yield return hideDelay;
+        playerMovement.MoveTo(transform.position);
+        gameObject.SetActive(false);
     }
 }

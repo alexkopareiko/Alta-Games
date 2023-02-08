@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
         if (transform.localScale.x <= minScale)
         {
             Debug.Log("MIN SCALE");
+            GameManager.instance.GameOver();
             return;
         }
         shoot.Initialize(_range);

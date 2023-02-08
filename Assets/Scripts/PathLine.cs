@@ -27,19 +27,14 @@ public class PathLine : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-
-        float startWidth = playerTran.localScale.x;
+        startWidth = playerTran.localScale.x;
         // width correction
         startWidth *= 1.2f;
-
-        
 
         meshRenderer.material = mat;
 
         mesh = GetComponent<MeshFilter>().mesh;
         mesh.Clear();
-
-
 
         playerPos = playerTran.position;
         finishPos = finishTran.position;

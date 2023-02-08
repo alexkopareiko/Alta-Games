@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public double counter { get; private set; }
     public bool gameIsPaused { get; private set; }
+    public bool gameIsOver { get; private set; }
 
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Transform finishTrans;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
+        gameIsOver = true;
     }
 
     public void MovePlayer()

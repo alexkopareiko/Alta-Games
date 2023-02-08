@@ -7,7 +7,18 @@ public class Player : MonoBehaviour
     [SerializeField] float minScale = 0.1f;
     [SerializeField] Shoot shoot;
 
-    public void SetScale(float _range)
+
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("obstacle"))
+        {
+            GameManager.instance.GameOver(); 
+        }
+    }
+
+
+public void SetScale(float _range)
     {
         transform.localScale = transform.localScale - transform.localScale * _range;
         if (transform.localScale.x <= minScale)

@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     bool move = false;
     bool isGrounded;
     bool isArrived = false;
-    WaitForSeconds waitMove = new WaitForSeconds(1);
+    WaitForSeconds waitMove = new WaitForSeconds(1.2f);
 
 
     private void Update()
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        if (move)
+        if (move && !GameManager.instance.gameIsOver)
         {
             CheckGround();
 
@@ -71,14 +71,21 @@ public class PlayerMovement : MonoBehaviour
     void CheckGround()
     {
         //isGrounded = characterController.isGrounded;
-        isGrounded = Physics.CheckSphere(transform.position, 0.05f, groundLayer, QueryTriggerInteraction.Ignore);
+        isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer, QueryTriggerInteraction.Ignore);
         //Debug.Log("isGrounded " + isGrounded);
+    }
+
+    IEnumerator MoveTo(Vector3 _to, bool _call)
+    {
+        yield return waitMove;
+        toPosition = _to;
+        move = true;
+        isArrived = false;
+
     }
 
     public void MoveTo(Vector3 _to)
     {
-        toPosition = _to;
-        move = true;
-        isArrived = false;
+        StartCoroutine(MoveTo(_to, true));
     }
 }

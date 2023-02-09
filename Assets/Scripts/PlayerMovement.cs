@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 move = false;
                 pathLine.Initialize();
+                return;
             }
 
             // move forward
@@ -70,8 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckGround()
     {
-        //isGrounded = characterController.isGrounded;
-        isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer, QueryTriggerInteraction.Ignore);
+        isGrounded = characterController.isGrounded;
+        //isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer, QueryTriggerInteraction.Ignore);
         //Debug.Log("isGrounded " + isGrounded);
     }
 
@@ -93,9 +94,8 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit hit;
         SphereCollider collider = GetComponentInChildren<SphereCollider>();
-        float radius = transform.localScale.x * 1.2f;
+        float radius = transform.localScale.x * 1f;
         Vector3 from = transform.position;
-        from.y = radius;
         from.z = from.z + radius;
 
         if (Physics.SphereCast(from, radius, transform.forward * 100, out hit))

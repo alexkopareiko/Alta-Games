@@ -41,10 +41,10 @@ public class PathLine : MonoBehaviour
 
         mesh.vertices = new Vector3[]
         {
-            new Vector3(playerPos.x - startWidth/2, playerPos.y, playerPos.z + 0.1f),
-            new Vector3(playerPos.x + startWidth/2, playerPos.y, playerPos.z + 0.1f),
-            new Vector3(finishPos.x - endWidth/2, finishPos.y, finishPos.z + 0.1f),
-            new Vector3(finishPos.x + endWidth/2, finishPos.y, finishPos.z + 0.1f),
+            new Vector3(playerPos.x - startWidth/2, 0.01f, playerPos.z + 0.1f),
+            new Vector3(playerPos.x + startWidth/2, 0.01f, playerPos.z + 0.1f),
+            new Vector3(finishPos.x - endWidth/2, 0.01f, finishPos.z + 0.1f),
+            new Vector3(finishPos.x + endWidth/2, 0.01f, finishPos.z + 0.1f),
         };
 
         mesh.triangles = new int[] {

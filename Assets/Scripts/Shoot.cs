@@ -10,42 +10,47 @@ public class Shoot : MonoBehaviour
     [SerializeField] float damageRadiusMulti = 5f;
     [SerializeField] LayerMask obstacleMask;
     [SerializeField] PlayerMovement playerMovement;
-    WaitForSeconds hideDelay = new WaitForSeconds(0.5f);
+    float range;
 
     private void Start()
     {
         gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        m_rigidbody.velocity = transform.forward * force;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("obstacle"))
         {
+
             Collider[] hitColliders = Physics.OverlapSphere(
-                transform.position, 
-                transform.localScale.x * damageRadiusMulti, 
+                transform.position,
+                range * damageRadiusMulti, 
                 obstacleMask);
             foreach (var hitCollider in hitColliders)
             {
                 hitCollider.SendMessage("ApplyDamage");
             }
-            StartCoroutine(HideMe());
+            gameObject.SetActive(false);
+            playerMovement.MoveTo(transform.position);
+        }
+        if(collision.collider.CompareTag("finish"))
+        {
+            gameObject.SetActive(false);
+            GameObject finish = GameManager.instance.GetFinishObj();
+            playerMovement.MoveTo(finish.transform.position);
         }
     }
 
     public void Initialize(float _range)
     {
         transform.localScale = playerMovement.transform.localScale * _range;
-        
+        range = _range;
         gameObject.SetActive(true);
-        m_rigidbody.AddForce(Vector3.forward * force, ForceMode.Impulse);
         pathLine.gameObject.SetActive(false);
-    }
-
-    IEnumerator HideMe()
-    {
-        yield return hideDelay;
-        playerMovement.MoveTo(transform.position);
-        gameObject.SetActive(false);
     }
 }

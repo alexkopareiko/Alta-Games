@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
         {
             GameManager.instance.GameOver(); 
         }
+        else if (hit.collider.CompareTag("finish"))
+        {
+            GameManager.instance.Win(); 
+        }
     }
 
 

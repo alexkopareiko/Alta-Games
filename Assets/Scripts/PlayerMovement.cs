@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -33,11 +34,11 @@ public class PlayerMovement : MonoBehaviour
             if (isArrived && isGrounded)
             {
                 move = false;
-
+                pathLine.Initialize();
             }
 
             // move forward
-            if(!isArrived)
+            if (!isArrived)
             {
                 characterController.Move(transform.forward * speed * Time.deltaTime);
             }
@@ -62,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
             if (transform.position.z >= toPosition.z)
             {
                 isArrived = true;
-                pathLine.Initialize();
             }
 
         }
@@ -78,14 +78,43 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator MoveTo(Vector3 _to, bool _call)
     {
         yield return waitMove;
-        toPosition = _to;
+        Vector3 to = _to;
+        if (CheckIfPathFree())
+        {
+            to = GameManager.instance.GetFinishObj().transform.position;
+        }
+        toPosition = to;
         move = true;
         isArrived = false;
 
     }
 
+    bool CheckIfPathFree()
+    {
+        RaycastHit hit;
+        SphereCollider collider = GetComponentInChildren<SphereCollider>();
+        float radius = transform.localScale.x * 1f;
+        Vector3 from = transform.position;
+        from.y = radius;
+        from.z = from.z + radius;
+
+        //if (Physics.SphereCast(from, radius, transform.forward * 100, out hit))
+        if (Physics.Raycast(from,  transform.forward * 100, out hit))
+        {
+            if (hit.collider.CompareTag("finish"))
+            {
+                Debug.Log("Path is free ");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void MoveTo(Vector3 _to)
     {
+        
         StartCoroutine(MoveTo(_to, true));
     }
+
+
 }

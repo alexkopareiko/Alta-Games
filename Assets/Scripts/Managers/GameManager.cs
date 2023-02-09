@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Menu")]
     [SerializeField] GameObject gameOverMenu;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject winMenu;
 
     WaitForSeconds Interval = new WaitForSeconds(0.1f);
     // where player should go
@@ -86,5 +87,10 @@ public class GameManager : MonoBehaviour
     public void MovePlayer()
     {
         playerMovement.MoveTo(finishTrans.position);
+    }
+
+    public void Win()
+    {
+        winMenu.SetActive(true);
     }
 }

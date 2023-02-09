@@ -40,7 +40,8 @@ public class Shoot : MonoBehaviour
         }
         if(collision.collider.CompareTag("finish"))
         {
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            playerMovement.MoveTo(transform.position);
             //GameObject finish = GameManager.instance.GetFinishObj();
             //playerMovement.MoveTo(finish.transform.position);
         }

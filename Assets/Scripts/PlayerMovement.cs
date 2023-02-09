@@ -20,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     WaitForSeconds waitMove = new WaitForSeconds(1.2f);
 
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         Movement();
@@ -93,17 +98,17 @@ public class PlayerMovement : MonoBehaviour
     bool CheckIfPathFree()
     {
         RaycastHit hit;
-        SphereCollider collider = GetComponentInChildren<SphereCollider>();
         float radius = transform.localScale.x * 1f;
         Vector3 from = transform.position;
-        from.z = from.z + radius;
+        from.z = from.z + 2 * radius + 0.2f;
+        from.y = from.y + radius + 0.2f;
 
         if (Physics.SphereCast(from, radius, transform.forward * 100, out hit))
         //if (Physics.Raycast(from,  transform.forward * 100, out hit))
         {
             if (hit.collider.CompareTag("finish"))
             {
-                Debug.Log("Path is free ");
+                //Debug.Log("Path is free ");
                 return true;
             }
         }
@@ -114,6 +119,18 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(MoveTo(_to, true));
     }
+
+    /*void OnDrawGizmosSelected()
+    {
+        float radius = transform.localScale.x * 1f;
+        Vector3 from = transform.position;
+        from.z = from.z + 2 * radius + 0.2f;
+        from.y = from.y + radius + 0.2f;
+
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(from, radius);
+    }*/
 
 
 }

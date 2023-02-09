@@ -93,13 +93,13 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit hit;
         SphereCollider collider = GetComponentInChildren<SphereCollider>();
-        float radius = transform.localScale.x * 1f;
+        float radius = transform.localScale.x * 1.2f;
         Vector3 from = transform.position;
         from.y = radius;
         from.z = from.z + radius;
 
-        //if (Physics.SphereCast(from, radius, transform.forward * 100, out hit))
-        if (Physics.Raycast(from,  transform.forward * 100, out hit))
+        if (Physics.SphereCast(from, radius, transform.forward * 100, out hit))
+        //if (Physics.Raycast(from,  transform.forward * 100, out hit))
         {
             if (hit.collider.CompareTag("finish"))
             {

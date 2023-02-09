@@ -13,7 +13,7 @@ public class CircleTap : MonoBehaviour
     [SerializeField] float maxWidth = 300f;
     bool increment = true;
     Vector2 maxSize;
-    const float minScale = 0.1f;
+    const float minScale = 0.05f;
 
     private void Update()
     {

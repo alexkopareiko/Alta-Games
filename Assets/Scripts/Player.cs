@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     }
 
 
-public void SetScale(float _range)
+    public void SetScale(float _range)
     {
         transform.localScale = transform.localScale - transform.localScale * _range;
         if (transform.localScale.x <= minScale)
@@ -32,6 +32,15 @@ public void SetScale(float _range)
             return;
         }
         shoot.Initialize(_range);
+        MoveBack();
+    }
 
+    void MoveBack()
+    {
+        transform.position += new Vector3(0, 0, -0.5f);
     }
 }
+
+
+
+

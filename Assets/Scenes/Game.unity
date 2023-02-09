@@ -7273,7 +7273,7 @@ MonoBehaviour:
   m_rigidbody: {fileID: 1382405668}
   force: 10
   pathLine: {fileID: 1522811701}
-  damageRadiusMulti: 5
+  damageRadiusMulti: 6
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256

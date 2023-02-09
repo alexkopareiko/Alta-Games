@@ -40,9 +40,9 @@ public class Shoot : MonoBehaviour
         }
         if(collision.collider.CompareTag("finish"))
         {
-            gameObject.SetActive(false);
-            GameObject finish = GameManager.instance.GetFinishObj();
-            playerMovement.MoveTo(finish.transform.position);
+            //gameObject.SetActive(false);
+            //GameObject finish = GameManager.instance.GetFinishObj();
+            //playerMovement.MoveTo(finish.transform.position);
         }
     }
 

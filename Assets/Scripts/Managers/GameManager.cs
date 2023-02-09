@@ -30,7 +30,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         TimeCountDown();
+        gameOverMenu.SetActive(false);
+        pauseMenu.SetActive(false);
     }
+
 
     void TimeCountDown()
     {
@@ -47,6 +50,16 @@ public class GameManager : MonoBehaviour
         if (Mathf.Floor((float)counter) == (float)counter)
             EventManager.StartTick1();
         TimeCountDown();
+    }
+
+    public GameObject GetPlayer()
+    {
+        return playerMovement.gameObject;
+    }
+
+    public GameObject GetFinishObj()
+    {
+        return finishTrans.gameObject;
     }
 
     public void PauseGame(bool needTriggerPauseMenu = true)

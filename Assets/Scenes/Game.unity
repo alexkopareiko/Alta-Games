@@ -7307,10 +7307,10 @@ MonoBehaviour:
   mapHeight: 35
   noiseScale: 0.12
   octaves: 4
-  persistance: 0.25
+  persistance: 0.558
   lacunarity: 1.09
   seed: 32
-  offset: {x: 88, y: 77}
+  offset: {x: 35, y: 24}
   autoUpdate: 0
   dataFromInsector: 0
 --- !u!114 &1302420469
@@ -7330,6 +7330,8 @@ MonoBehaviour:
   top: 7
   bottom: -23
   radiusToAvoid: 3
+  obstacleAllowed: 25
+  roadWidth: 1
   obstaclePref: {fileID: 6547659541089070811, guid: 28f8257d598b18d4bb1e0951aa75cbfe, type: 3}
   playerTrans: {fileID: 243867591}
   finishTrans: {fileID: 411687420}

@@ -42,6 +42,7 @@ public class Shoot : MonoBehaviour
         {
             gameObject.SetActive(false);
             playerMovement.MoveTo(transform.position);
+
             //GameObject finish = GameManager.instance.GetFinishObj();
             //playerMovement.MoveTo(finish.transform.position);
         }

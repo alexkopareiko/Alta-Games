@@ -70,6 +70,7 @@ public class ObstacleDisplay : MonoBehaviour
                 obstacle = Instantiate(obstaclePref, position, Quaternion.identity);
                 obstacle.transform.localScale = obstacle.transform.localScale * noiseMap[x, y] * 2;
                 obstacle.transform.SetParent(obstacles.transform);
+                obstacle.name = x + " " + y;
             }
         }
     }

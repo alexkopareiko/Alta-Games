@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CharacterController characterController;
     [SerializeField] PathLine pathLine;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask doorTriggerLayer;
 
     Vector3 toPosition;
     Vector3 velocity;
@@ -100,12 +101,17 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         float radius = transform.localScale.x * 1f;
         Vector3 from = transform.position;
-        from.z = from.z + 2 * radius + 0.2f;
-        from.y = from.y + radius + 0.2f;
+        from.z = from.z + 2 * radius;
+        from.y = from.y + radius + 0.5f;
 
-        if (Physics.SphereCast(from, radius, transform.forward * 100, out hit))
+        // ignore door trigger block
+        int layerMask = 1 << (int)doorTriggerLayer;
+        layerMask = ~layerMask;
+
+        if (Physics.SphereCast(from, radius, transform.forward * 100, out hit, 100))
         //if (Physics.Raycast(from,  transform.forward * 100, out hit))
         {
+            //Debug.Log("name " + hit.collider.gameObject.transform.parent.name);
             if (hit.collider.CompareTag("finish"))
             {
                 //Debug.Log("Path is free ");
@@ -120,17 +126,17 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(MoveTo(_to, true));
     }
 
-    /*void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         float radius = transform.localScale.x * 1f;
         Vector3 from = transform.position;
-        from.z = from.z + 2 * radius + 0.2f;
+        from.z = from.z + 2 * radius;
         from.y = from.y + radius + 0.2f;
 
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(from, radius);
-    }*/
+    }
 
 
 }

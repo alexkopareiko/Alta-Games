@@ -5,10 +5,11 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] GameObject doorObj;
+    bool isActivated = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !isActivated)
         {
             Activate();
         }
@@ -16,8 +17,7 @@ public class DoorTrigger : MonoBehaviour
 
     public void Activate()
     {
-        Vector3 downTo = doorObj.transform.position;
-        downTo.y = -0.89f;
-        LeanTween.move(doorObj, downTo, 2);
+        LeanTween.rotateY(doorObj, -70, 2).setEaseInElastic();
+        isActivated = true;
     }
 }
